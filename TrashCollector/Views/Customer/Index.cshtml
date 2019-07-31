@@ -1,0 +1,83 @@
+﻿@model TrashCollector.Models.Customer
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Street)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Street)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Zip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Zip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pickupDay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pickupDay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.suspendStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.suspendStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.suspendEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.suspendEnd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OneTimePickup)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OneTimePickup)
+        </dd>
+        @Html.HiddenFor(model => model.ApplicationId)
+    </dl>
+</div>
+<p>
+    <!-- |-->
+    @Html.ActionLink("Back to List", "Index")
+</p>
