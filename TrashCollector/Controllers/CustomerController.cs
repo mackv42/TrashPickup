@@ -27,6 +27,7 @@ namespace TrashCollector.Controllers
         }
 
         // GET: Customer/Details/5
+        [Authorize(Roles = "Customer")]
         public ActionResult Details(int id)
         {
             return View();
@@ -40,6 +41,7 @@ namespace TrashCollector.Controllers
         }
 
         // POST: Customer/Create
+        [Authorize(Roles = "Customer")]
         [HttpPost]
         public ActionResult Create(Customer c)
         {
@@ -66,12 +68,14 @@ namespace TrashCollector.Controllers
         }
 
         // GET: Customer/Edit/5
+        [Authorize(Roles = "Customer")]
         public ActionResult Edit(int id)
         {
             return View();
         }
 
         // POST: Customer/Edit/5
+        [Authorize(Roles = "Customer")]
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -88,12 +92,14 @@ namespace TrashCollector.Controllers
         }
 
         // GET: Customer/Delete/5
+        [Authorize(Roles = "Customer")]
         public ActionResult Delete(int id)
         {
             return View();
         }
 
         // POST: Customer/Delete/5
+        [Authorize(Roles = "Customer")]
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
