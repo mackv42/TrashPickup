@@ -70,7 +70,7 @@
             </td>
             
             <td>
-                @Html.ActionLink("Details", "Details", "Customer", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", "Customer", new { id = item.Id }, null) |
             </td>
         </tr>
         @Html.HiddenFor(modelItem => item.ApplicationId)

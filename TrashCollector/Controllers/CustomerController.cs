@@ -20,18 +20,24 @@ namespace TrashCollector.Controllers
         [Authorize(Roles = "Customer")]
         public ActionResult Index()
         {
-            string find = User.Identity.GetUserId();
-            Customer c = _context.Customers.Where(x => x.ApplicationId == find).FirstOrDefault();
-            return View(c);
+            
+            return RedirectToAction("Details");
         }
 
 
         // GET: Customer/Details/5
-        [Authorize(Roles = "Customer")]
-        public ActionResult Details()
+        [Authorize(Roles = "Customer,Employee")]
+    
+        public ActionResult Details(int? Id)
         {
-            string find = User.Identity.GetUserId();
-            Customer customer = _context.Customers.Where(x=>x.ApplicationId == find ).FirstOrDefault();
+            Customer customer = new Customer();
+            if(Id == null)
+            {
+                string find = User.Identity.GetUserId();
+                customer = _context.Customers.Where(x => x.ApplicationId == find).FirstOrDefault();
+                return View(customer);
+            }
+            customer = _context.Customers.Where(x => x.Id == Id).FirstOrDefault();
             return View(customer);
         }
 
@@ -76,6 +82,14 @@ namespace TrashCollector.Controllers
             {
                 return RedirectToAction("Index");
             }
+        }
+
+        [Authorize(Roles = "Customer")]
+        public ActionResult EditPickup()
+        {
+            string find = User.Identity.GetUserId();
+            Customer customer = _context.Customers.Where(x => x.ApplicationId == find).FirstOrDefault();
+            return View(customer);
         }
 
         // GET: Customer/Edit/5

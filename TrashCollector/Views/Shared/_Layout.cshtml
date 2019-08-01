@@ -4,8 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"
+            integrity="sha256-xNjb53/rY+WmG+4L6tTl9m6PpqknWZvRt0rO1SRnJzw="
+            crossorigin="anonymous"></script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+
+
 
 </head>
 <body>
@@ -17,13 +26,37 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
+           @if (User.IsInRole("Employee"))
+            {
+                <a href="/Employee"><h3 style="color: white">Employee Account</h3></a>
+                Html.ActionLink("Employee Account", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" });
+            }
+            else if (User.IsInRole("Customer"))
+            {
+                <a href="/Customer"><h3 style="color: white">Customer Account</h3></a>
+                Html.ActionLink("Customer Account", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" });
+            }
+            else
+            {
+                <a href="/Home"><h3 style="color: white">Trash Pickup</h3></a>
+                Html.ActionLink("TrashPickup", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" });
+            }
+
+</div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @if (User.IsInRole("Customer"))
+                    {
+                        <li>@Html.ActionLink("Index", "Index", "Customer")</li>
+                        <li>@Html.ActionLink("Edit", "Edit", "Customer")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    }
+                    else if (User.IsInRole("Employee"))
+                    {
+                        <li>@Html.ActionLink("CustomerList", "CustomerList", "Employee")</li>
+                        <li>@Html.ActionLink("Edit", "Edit", "Customer")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
