@@ -8,7 +8,6 @@ using TrashCollector.Models;
 
 namespace TrashCollector.Controllers
 {
-   
     public class CustomerController : Controller
     {
         private ApplicationDbContext _context;
@@ -26,40 +25,52 @@ namespace TrashCollector.Controllers
             return View(c);
         }
 
+
         // GET: Customer/Details/5
         [Authorize(Roles = "Customer")]
-        public ActionResult Details(int id)
+        public ActionResult Details()
         {
-            return View();
+            string find = User.Identity.GetUserId();
+            Customer customer = _context.Customers.Where(x=>x.ApplicationId == find ).FirstOrDefault();
+            return View(customer);
         }
 
         // GET: Customer/Create
+        
+        [Authorize(Roles = "Customer")]
         public ActionResult Create()
         {
-            
+            string find = User.Identity.GetUserId();
+            Customer customer = _context.Customers.Where(x => x.ApplicationId == find).FirstOrDefault();
+            if(customer != null)
+            {
+                return RedirectToAction("Index", "Customer");
+            }
             return View();
         }
 
         // POST: Customer/Create
-        [Authorize(Roles = "Customer")]
         [HttpPost]
         public ActionResult Create(Customer c)
         {
-            
-            c.ApplicationId = User.Identity.GetUserId();
-            ApplicationUser user = _context.Users.Where(x=>x.Id ==c.ApplicationId).FirstOrDefault();
-            user.UserRole = _context.Roles.Where(x => x.Name == "Customer").FirstOrDefault().Name;
-            
-            c.pickupDay = null;
-            c.OneTimePickup = null;
-            c.suspendEnd = null;
-            c.suspendEnd = null;
-            _context.Customers.Add(c);
-            _context.SaveChanges();
-            return RedirectToAction("Index");
-            try
-            {
+            try { 
+                c.ApplicationId = User.Identity.GetUserId();
+                if (String.IsNullOrEmpty(c.Address)|
+                    String.IsNullOrEmpty(c.State)|
+                    String.IsNullOrEmpty(c.Zip))
+                {
+                    return RedirectToAction("Create", "Customer");
+                }
+                ApplicationUser user = _context.Users.Where(x=>x.Id ==c.ApplicationId).FirstOrDefault();
+                user.UserRole = _context.Roles.Where(x => x.Name == "Customer").FirstOrDefault().Name;
                 
+                c.pickupDay = null;
+                c.OneTimePickup = null;
+                c.suspendEnd = null;
+                c.suspendEnd = null;
+                _context.Customers.Add(c);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
             }
             catch
             {
