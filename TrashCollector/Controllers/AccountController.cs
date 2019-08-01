@@ -162,12 +162,16 @@ namespace TrashCollector.Controllers
                     if (model.SelectedRoleId == "0")
                     {
                         await this.UserManager.AddToRoleAsync(user.Id, "Customer");
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        return RedirectToAction("Create", "Customer", user);
                     }
                     else if (model.SelectedRoleId == "1")
                     {
                         await this.UserManager.AddToRoleAsync(user.Id, "Employee");
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        return RedirectToAction("Create", "Employee", user);
                     }
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    
 
                     //Change if needed
                     
@@ -177,7 +181,7 @@ namespace TrashCollector.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                    
-                    return RedirectToAction("Create",  "Customer", user);
+                   
                 }
                 AddErrors(result);
             }

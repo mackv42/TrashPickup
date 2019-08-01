@@ -13,9 +13,9 @@ namespace TrashCollector.Models
     {
         [Key]
         public int Id { get; set; }
-        public string Street { get; set; }
-        public string Address { get; set; }
+        public string City { get; set; }
         public string State { get; set; }
+        public string Address { get; set; }
         public string Zip { get; set; }
         public byte? pickupDay { get; set; }
         public DateTime? suspendStart { get; set; }

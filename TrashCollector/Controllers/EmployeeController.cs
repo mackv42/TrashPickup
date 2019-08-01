@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,11 @@ namespace TrashCollector.Controllers
 {
     public class EmployeeController : Controller
     {
+        private ApplicationDbContext _context;
+        public EmployeeController()
+        {
+            _context = new ApplicationDbContext();
+        }
         // GET: Employee
         [Authorize(Roles = "Employee")]
         public ActionResult Index()
@@ -26,6 +32,12 @@ namespace TrashCollector.Controllers
         // GET: Employee/Create
         public ActionResult Create()
         {
+            string find = User.Identity.GetUserId();
+            Employee Employee = _context.Employees.Where(x => x.ApplicationId == find).FirstOrDefault();
+            if(Employee != null)
+            {
+                return RedirectToAction("Index", "Employee");
+            }
             return View();
         }
 
@@ -36,13 +48,24 @@ namespace TrashCollector.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                employee.ApplicationId = User.Identity.GetUserId();
+                if (String.IsNullOrEmpty(employee.Address) |
+                    String.IsNullOrEmpty(employee.State) |
+                    String.IsNullOrEmpty(employee.Zip))
+                {
+                    return RedirectToAction("Create", "Employee");
+                }
+                ApplicationUser user = _context.Users.Where(x => x.Id == employee.ApplicationId).FirstOrDefault();
+                user.UserRole = _context.Roles.Where(x => x.Name == "Customer").FirstOrDefault().Name;
 
+                
+                _context.Employees.Add(employee);
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index");
             }
         }
 

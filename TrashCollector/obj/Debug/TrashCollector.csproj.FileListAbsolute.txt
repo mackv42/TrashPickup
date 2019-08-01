@@ -117,3 +117,4 @@ C:\Users\Vincent\source\repos\TrashCollector\TrashCollector\obj\Debug\TrashColle
 C:\Users\Vincent\source\repos\TrashCollector\TrashCollector\bin\AWSSDK.dll
 C:\Users\Vincent\source\repos\TrashCollector\TrashCollector\bin\AWSSDK.pdb
 C:\Users\Vincent\source\repos\TrashCollector\TrashCollector\obj\Debug\TrashCollector.Migrations.removeEmailFromCustomer.resources
+C:\Users\Vincent\source\repos\TrashCollector\TrashCollector\obj\Debug\TrashCollector.Migrations.UpdateAddressProperties.resources
