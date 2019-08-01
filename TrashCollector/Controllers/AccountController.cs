@@ -154,6 +154,10 @@ namespace TrashCollector.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (model.SelectedRoleId == null)
+                {
+                    return RedirectToAction("Register");
+                }
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 

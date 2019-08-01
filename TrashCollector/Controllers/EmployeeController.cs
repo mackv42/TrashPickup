@@ -19,7 +19,16 @@ namespace TrashCollector.Controllers
         [Authorize(Roles = "Employee")]
         public ActionResult Index()
         {
-            return RedirectToAction("Details");
+            return RedirectToAction("CustomerList");
+        }
+
+        public ActionResult CustomerList()
+        {
+            string find = User.Identity.GetUserId();
+            Employee employee = _context.Employees.Where(x => x.ApplicationId == find).FirstOrDefault();
+            List<Customer> Customers = _context.Customers.Where(x => x.Zip == employee.Zip).ToList();
+
+            return View(Customers); 
         }
 
         // GET: Employee/Details/5
