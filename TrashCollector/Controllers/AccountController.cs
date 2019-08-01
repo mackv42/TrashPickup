@@ -156,9 +156,17 @@ namespace TrashCollector.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                
                 if (result.Succeeded)
                 {
-                    await this.UserManager.AddToRoleAsync(user.Id, "Customer");
+                    if (model.SelectedRoleId == "0")
+                    {
+                        await this.UserManager.AddToRoleAsync(user.Id, "Customer");
+                    }
+                    else if (model.SelectedRoleId == "1")
+                    {
+                        await this.UserManager.AddToRoleAsync(user.Id, "Employee");
+                    }
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     //Change if needed

@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+using System.Web.Security;
+using System.Web.WebPages.Html;
 
 namespace TrashCollector.Models
 {
@@ -64,6 +67,7 @@ namespace TrashCollector.Models
 
     public class RegisterViewModel
     {
+        
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -74,13 +78,14 @@ namespace TrashCollector.Models
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
-
+        public List<string> UserRoleList = new List<string>() { "Customer", "Employee"};
+        [Display(Name ="Role")]
+        public string SelectedRoleId { get; set; }
+      
         
-        public List<ApplicationUser> Role { get; set; }
-
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
 
         
         public string ConfirmPassword { get; set; }
@@ -101,7 +106,7 @@ namespace TrashCollector.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

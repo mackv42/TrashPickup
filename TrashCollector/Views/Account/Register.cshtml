@@ -30,6 +30,19 @@
         </div>
     </div>
 
+    <div class="form-group">
+        <div class="col-md-10">
+            @{
+                var selectList = new SelectList(
+                    new List<SelectListItem>
+                    {
+            new SelectListItem {Text = "Customer", Value = "0"},
+            new SelectListItem {Text = "Employee", Value = "1"},
+                    }, "Value", "Text");
+            }
+            @Html.DropDownListFor(m => m.SelectedRoleId, selectList, "Default label", new { @class = "css-class" });
+        </div>
+    </div>
     
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
