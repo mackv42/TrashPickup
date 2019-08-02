@@ -102,6 +102,23 @@ namespace TrashCollector.Controllers
             return View(found);
         }
 
+        public static int daysInRange(int days, DayOfWeek day)
+        {
+            DateTime tmp = DateTime.Now;
+            Console.WriteLine(tmp.DayOfWeek);
+            int ans = 0;
+            for (int i = 0; i <= days; i++)
+            {
+                if (tmp.DayOfWeek == day)
+                {
+                    ans++;
+                    tmp = tmp.AddDays(1);
+                    continue;
+                }
+                tmp = tmp.AddDays(1);
+            }
+            return ans;
+        }
 
         //Payments happen every 4weeks after first pickup
         [Authorize(Roles = "Customer")]
@@ -121,9 +138,10 @@ namespace TrashCollector.Controllers
             {
                 difference = difference + 7;
             }
-            found.paymentDue = 4 * _pickupPrice;
-            found.paymentDay = today.AddDays(difference+28); 
             
+            found.paymentDay = today.AddDays(difference+28);
+            //found.paymentDue = daysInRange((today.AddDays(difference + 28).Day - DateTime.Now.Day), (DayOfWeek)found.pickupDay) * _pickupPrice;
+            found.paymentDue = 4 * _pickupPrice;
             _context.SaveChanges();
             return RedirectToAction("Index");
         }

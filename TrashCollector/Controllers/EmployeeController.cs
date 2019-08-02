@@ -22,11 +22,24 @@ namespace TrashCollector.Controllers
             return RedirectToAction("CustomerList");
         }
 
-        public ActionResult CustomerList()
+        public ActionResult CustomerList(DayOfWeek? day)
         {
             string find = User.Identity.GetUserId();
             Employee employee = _context.Employees.Where(x => x.ApplicationId == find).FirstOrDefault();
             List<Customer> Customers = _context.Customers.Where(x => x.Zip == employee.Zip).ToList();
+            Customers = Customers.Where(x => x.pickupDay != null).ToList();
+            string dayofWeek = Request.QueryString["testSelect"];
+
+            if (!String.IsNullOrEmpty(dayofWeek))
+            {
+                Customers = Customers.Where(x => x.pickupDay == (byte?)Int32.Parse(dayofWeek)).ToList();
+            }
+            else
+            {
+                
+                byte? todaysDayOfWeek = (byte?)DateTime.Now.DayOfWeek;
+                Customers = Customers.Where(x => x.pickupDay == todaysDayOfWeek).ToList();
+            }
 
             return View(Customers); 
         }

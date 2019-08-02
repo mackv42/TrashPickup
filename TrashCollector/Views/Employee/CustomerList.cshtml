@@ -9,6 +9,18 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<form action="/Employee/CustomerList" id="dayofWeek">
+    <select form="dayofWeek" name="testSelect">
+        <option value=0>Sunday</option>
+        <option value=1>Monday</option>
+        <option value=2>Tuesday</option>
+        <option value=3>Wednesday</option>
+        <option value=4>Thursday</option>
+        <option value=5>Friday</option>
+        <option value=6>Saturday</option>
+    </select>
+    <input type="submit" value="confirm">
+</form>
 <table class="table">
     <tr>
         <th>
@@ -68,7 +80,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.OneTimePickup)
             </td>
-            
+
             <td>
                 @Html.ActionLink("Details", "Details", "Customer", new { id = item.Id }, null) |
             </td>
