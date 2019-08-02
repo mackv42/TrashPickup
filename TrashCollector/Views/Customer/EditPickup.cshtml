@@ -47,6 +47,7 @@
             @Html.LabelFor(model => model.suspendEnd, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.suspendEnd, new { htmlAttributes = new { @class = "hasDatepicker", @textmode = "Date" } })
+                <asp:textbox id="txtEventDate" runat="server" cssclass="date-picker" />
                 @Html.ValidationMessageFor(model => model.suspendEnd, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -75,7 +76,37 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 <script type="text/javascript">
-    $(document).ready(function () {
+    /*$(document).ready(function () {
         $("#suspendEnd").datepicker();
-    });
+    });*/
+
+    function make_hover(){
+    $(".datepickerDays td span").hover(function(e){
+        $(this).trigger("click")
+    })
+    $(".datepickerDays td").mouseup(function(e){
+        $('#inputDate').DatePickerHide(); //hide it when click actually occurs
+    })
+    $(".datepickerContainer").mouseup(function(e){
+        setTimeout(function(){
+          make_hover()
+        },0) //have to run this with setTimeout to force it to run after DOM changes
+    })
+}
+
+
+    $("#suspendEnd").datepicker({
+        format: 'm/d/Y', 
+    date: $('#inputDate').val(),
+    current: $('#inputDate').val(),
+    eventName: 'mouseenter',
+    onBeforeShow: function(){
+        $('#inputDate').DatePickerSetDate($('#inputDate').val(), true);
+        make_hover()
+    },
+    onChange: function(formated, dates){
+        $('#inputDate').val(formated);
+        make_hover()
+    }
+})
 </script>

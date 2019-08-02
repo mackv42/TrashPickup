@@ -92,6 +92,20 @@ namespace TrashCollector.Controllers
             return View(customer);
         }
 
+        [Authorize(Roles = "Customer")]
+        [HttpPost]
+        public ActionResult EditPickup(Customer customer)
+        {
+            string find = User.Identity.GetUserId();
+            Customer found = _context.Customers.Where(x => x.ApplicationId == find).FirstOrDefault();
+            found.pickupDay = customer.pickupDay;
+            found.OneTimePickup = customer.OneTimePickup;
+            found.suspendEnd = customer.suspendEnd;
+            found.suspendStart = customer.suspendStart;
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         // GET: Customer/Edit/5
         [Authorize(Roles = "Customer")]
         public ActionResult Edit(int id)
