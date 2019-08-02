@@ -66,8 +66,22 @@ namespace TrashCollector.Controllers
             return View();
         }
 
-        // POST: Employee/Create
         
+        //[Authorize (Roles="Employee")]
+        public ActionResult CustomerDetails(int? id)
+        {
+            return View(_context.Customers.Where(x => x.Id == id).FirstOrDefault());
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Employee")]
+        public ActionResult CustomerDetails(Customer customer)
+        {
+            return View("Index");
+        }
+
+        // POST: Employee/Create
+
         [HttpPost]
         public ActionResult Create(Employee employee)
         {

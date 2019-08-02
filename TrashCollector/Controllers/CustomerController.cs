@@ -141,7 +141,7 @@ namespace TrashCollector.Controllers
             
             found.paymentDay = today.AddDays(difference+28);
             //found.paymentDue = daysInRange((today.AddDays(difference + 28).Day - DateTime.Now.Day), (DayOfWeek)found.pickupDay) * _pickupPrice;
-            found.paymentDue = 4 * _pickupPrice;
+            found.monthlyPayment = 4 * _pickupPrice;
             _context.SaveChanges();
             return RedirectToAction("Index");
         }

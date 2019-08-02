@@ -13,7 +13,8 @@ namespace TrashCollector.Models
     {
         [Key]
         public int Id { get; set; }
-        public double paymentDue { get; set; }
+        public double? paymentDue { get; set; }
+        public double? monthlyPayment { get; set; }
         public DateTime? paymentDay { get; set; }
         public string City { get; set; }
         public string State { get; set; }
