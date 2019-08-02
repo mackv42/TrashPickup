@@ -220,6 +220,10 @@
     <Compile Include="Migrations\201908011627130_UpdateAddressProperties.Designer.cs">
       <DependentUpon>201908011627130_UpdateAddressProperties.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908021355500_AddCustomerPaymentInfo.cs" />
+    <Compile Include="Migrations\201908021355500_AddCustomerPaymentInfo.Designer.cs">
+      <DependentUpon>201908021355500_AddCustomerPaymentInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -335,6 +339,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908011627130_UpdateAddressProperties.resx">
       <DependentUpon>201908011627130_UpdateAddressProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908021355500_AddCustomerPaymentInfo.resx">
+      <DependentUpon>201908021355500_AddCustomerPaymentInfo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

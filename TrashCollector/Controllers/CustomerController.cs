@@ -11,16 +11,16 @@ namespace TrashCollector.Controllers
     public class CustomerController : Controller
     {
         private ApplicationDbContext _context;
+        public double _pickupPrice;
         public CustomerController()
         {
             _context = new ApplicationDbContext();
-           
+            _pickupPrice = 2.50;
         }
         // GET: Customer
         [Authorize(Roles = "Customer")]
         public ActionResult Index()
         {
-            
             return RedirectToAction("Details");
         }
 
@@ -92,6 +92,18 @@ namespace TrashCollector.Controllers
             return View(customer);
         }
 
+        [Authorize(Roles ="Customer")]
+        [HttpGet]
+        public ActionResult GetPayment(Customer customer)
+        {
+            string find = User.Identity.GetUserId();
+            Customer found = _context.Customers.Where(x => x.ApplicationId == find).FirstOrDefault();
+
+            return View(found);
+        }
+
+
+        //Payments happen every 4weeks after first pickup
         [Authorize(Roles = "Customer")]
         [HttpPost]
         public ActionResult EditPickup(Customer customer)
@@ -102,9 +114,21 @@ namespace TrashCollector.Controllers
             found.OneTimePickup = customer.OneTimePickup;
             found.suspendEnd = customer.suspendEnd;
             found.suspendStart = customer.suspendStart;
+
+            DateTime today = DateTime.Now;
+            int difference = (int)found.pickupDay - (int)today.DayOfWeek;
+            if(difference < 0)
+            {
+                difference = difference + 7;
+            }
+            found.paymentDue = 4 * _pickupPrice;
+            found.paymentDay = today.AddDays(difference+28); 
+            
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        //[Authorize(Roles = "Admin")]
 
         // GET: Customer/Edit/5
         [Authorize(Roles = "Customer")]
