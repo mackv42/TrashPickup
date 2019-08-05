@@ -232,6 +232,10 @@
     <Compile Include="Migrations\201908021626027_makeDoublesNullable.Designer.cs">
       <DependentUpon>201908021626027_makeDoublesNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908021704309_addPickupPrice.cs" />
+    <Compile Include="Migrations\201908021704309_addPickupPrice.Designer.cs">
+      <DependentUpon>201908021704309_addPickupPrice.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -253,6 +257,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\JavaScript.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -262,6 +267,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\maps.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -357,6 +363,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908021626027_makeDoublesNullable.resx">
       <DependentUpon>201908021626027_makeDoublesNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908021704309_addPickupPrice.resx">
+      <DependentUpon>201908021704309_addPickupPrice.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

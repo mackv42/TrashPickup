@@ -59,7 +59,9 @@ namespace TrashCollector.Controllers
         [HttpPost]
         public ActionResult Create(Customer c)
         {
-            try { 
+            
+            try {
+                c.pickupPrice = _pickupPrice;
                 c.ApplicationId = User.Identity.GetUserId();
                 if (String.IsNullOrEmpty(c.Address)|
                     String.IsNullOrEmpty(c.State)|
@@ -160,6 +162,7 @@ namespace TrashCollector.Controllers
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
+
             try
             {
                 // TODO: Add update logic here

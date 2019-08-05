@@ -10,6 +10,8 @@
     <h4>Customer</h4>
     <hr />
     <dl class="dl-horizontal">
+        <div id="map" style="width: 400px; height: 300px;"></div>
+
         <dt>
             @Html.DisplayNameFor(model => model.paymentDue)
         </dt>
@@ -98,17 +100,39 @@
             @Html.DisplayFor(model => model.OneTimePickup)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ApplicationId)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ApplicationId)
-        </dd>
+        @Html.HiddenFor(model => model.ApplicationId)
 
     </dl>
 </div>
 <p>
-   
+    <div class="form-group" Runat="Server">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="ConfirmPickup" class="btn btn-default" id="ConfirmPickup" />
+            
+        </div>
+    </div>
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<script src="~/Scripts/maps.js"></script>
+<script> getLoc("@Model.City" + "+" + "@Model.Address")</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap7599">
+</script>
+<script defer>
+    
+</script>
+<script>
+                document.getElementById("ConfirmPickup").onclick = function (e) {
+
+                    if (confirm(
+                        "Did you pickup their trash?"
+                    )) {
+                        $.post(
+                            '/Employee/ConfirmPickup/@Model.Id'
+                        )
+                    }
+                }
+                e.preventDefault();
+</script>

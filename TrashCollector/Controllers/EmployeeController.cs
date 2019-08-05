@@ -70,14 +70,19 @@ namespace TrashCollector.Controllers
         //[Authorize (Roles="Employee")]
         public ActionResult CustomerDetails(int? id)
         {
-            return View(_context.Customers.Where(x => x.Id == id).FirstOrDefault());
+            Response.AppendHeader("Access-Control-Allow-Origin", "*");
+            var a = _context.Customers.Where(x => x.Id == id).FirstOrDefault();
+            return View(a);
         }
 
         [HttpPost]
         [Authorize(Roles = "Employee")]
-        public ActionResult CustomerDetails(Customer customer)
+        public ActionResult ConfirmPickup(int? Id)
         {
-            return View("Index");
+            Customer found = _context.Customers.Where(x => x.Id == Id).FirstOrDefault();
+            found.paymentDue += found.pickupPrice;
+            _context.SaveChanges();
+            return RedirectToAction("CustomerList", 1);
         }
 
         // POST: Employee/Create

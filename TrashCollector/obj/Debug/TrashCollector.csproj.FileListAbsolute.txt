@@ -121,3 +121,4 @@ C:\Users\Vincent\source\repos\TrashCollector\TrashCollector\obj\Debug\TrashColle
 C:\Users\Vincent\source\repos\TrashCollector\TrashCollector\obj\Debug\TrashCollector.Migrations.AddCustomerPaymentInfo.resources
 C:\Users\Vincent\source\repos\TrashCollector\TrashCollector\obj\Debug\TrashCollector.Migrations.addedpaymentdue.resources
 C:\Users\Vincent\source\repos\TrashCollector\TrashCollector\obj\Debug\TrashCollector.Migrations.makeDoublesNullable.resources
+C:\Users\Vincent\source\repos\TrashCollector\TrashCollector\obj\Debug\TrashCollector.Migrations.addPickupPrice.resources
