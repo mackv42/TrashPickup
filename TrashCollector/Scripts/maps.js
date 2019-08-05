@@ -4,7 +4,7 @@
 var loc = { lat: 0, lng: 0 };
 function getLoc(x) {
     $.ajax({
-        url: "https://maps.googleapis.com/maps/api/geocode/json?address="+ x + "&key=AIzaSyBcwWMcJNZrBLaqQMBogJQgKcLgdfp7eH0",
+        url: "https://maps.googleapis.com/maps/api/geocode/json?address="+ x + "&key=",
         type: "POST",
         dataType: "json",
 

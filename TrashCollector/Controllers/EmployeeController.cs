@@ -22,6 +22,7 @@ namespace TrashCollector.Controllers
             return RedirectToAction("CustomerList");
         }
 
+        [Authorize(Roles = "Employee")]
         public ActionResult CustomerList(DayOfWeek? day)
         {
             string find = User.Identity.GetUserId();
@@ -67,7 +68,7 @@ namespace TrashCollector.Controllers
         }
 
         
-        //[Authorize (Roles="Employee")]
+        [Authorize (Roles="Employee")]
         public ActionResult CustomerDetails(int? id)
         {
             Response.AppendHeader("Access-Control-Allow-Origin", "*");
@@ -81,6 +82,11 @@ namespace TrashCollector.Controllers
         {
             Customer found = _context.Customers.Where(x => x.Id == Id).FirstOrDefault();
             found.paymentDue += found.pickupPrice;
+            //_context.pick.Add();
+            Pickup pickup = new Pickup();
+            pickup.Day = DateTime.Now;
+            pickup.CustomerId = found.Id;
+            _context.Pickups.Add(pickup);
             _context.SaveChanges();
             return RedirectToAction("CustomerList", 1);
         }

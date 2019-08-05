@@ -236,12 +236,17 @@
     <Compile Include="Migrations\201908021704309_addPickupPrice.Designer.cs">
       <DependentUpon>201908021704309_addPickupPrice.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908051925491_Added pickup model.cs" />
+    <Compile Include="Migrations\201908051925491_Added pickup model.Designer.cs">
+      <DependentUpon>201908051925491_Added pickup model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Pickup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -366,6 +371,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908021704309_addPickupPrice.resx">
       <DependentUpon>201908021704309_addPickupPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908051925491_Added pickup model.resx">
+      <DependentUpon>201908051925491_Added pickup model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
